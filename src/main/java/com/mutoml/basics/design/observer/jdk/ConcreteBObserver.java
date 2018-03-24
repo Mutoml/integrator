@@ -8,12 +8,12 @@ import java.util.Observer;
  * Description:
  *
  * @author: Mutoml
- * @date: 2018-03-20
- * @time: 19:04
+ * @date: 2018-03-22
+ * @time: 17:11
  */
-public class ConcreteObserver implements Observer {
+public class ConcreteBObserver implements Observer {
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println(Thread.currentThread().getName() + "---ConcreteObserver---" + o.getClass().getSimpleName() + arg);
+        System.out.println(Thread.currentThread().getName() + "----ConcreteBObserver--" + o.getClass().getSimpleName() + arg);
     }
 }

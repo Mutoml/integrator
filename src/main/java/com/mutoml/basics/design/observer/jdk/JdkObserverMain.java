@@ -12,6 +12,7 @@ public class JdkObserverMain {
     public static void main(String[] args) {
         ConcreteObservable concreteObservable = new ConcreteObservable();
         concreteObservable.addObserver(new ConcreteObserver());
+        concreteObservable.addObserver(new ConcreteBObserver());
         concreteObservable.setAvable("hello");
     }
 }

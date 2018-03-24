@@ -17,13 +17,36 @@ public class Master {
     /**
      * 任务队列
      */
-    private Queue<Object> queue = new ConcurrentLinkedQueue<>();
+    private Queue<Object> taskQueue = new ConcurrentLinkedQueue<>();
     /**
      * worker进程队列
      */
-    private Map<String, Thread> worderQueue = new ConcurrentHashMap<>();
+    private Map<String, Thread> workerQueue = new ConcurrentHashMap<>();
     /**
      * 结果队列
      */
-    private Map<String, Object> result = new ConcurrentHashMap<>();
+    private Map<String, Object> resultMap = new ConcurrentHashMap<>();
+
+    public Master(Worker worker, int workerCount) {
+        worker.setObjectQueue(taskQueue);
+        worker.setObjectMap(resultMap);
+        for (int i = 0; i < workerCount; i++) {
+            workerQueue.put(String.valueOf(i), new Thread(worker));
+        }
+    }
+
+    public void commit(Object object) {
+        taskQueue.offer(object);
+    }
+
+    public void excute() {
+        for (Map.Entry<String, Thread> entry :
+                workerQueue.entrySet()) {
+            entry.getValue().start();
+        }
+    }
+
+    public Object getResult(String key) {
+        return resultMap.get(key);
+    }
 }

@@ -19,7 +19,6 @@ public class MasterWorkerMain {
 
         for (int i = 0; i < 100; i++) {
             System.out.println("result：" + master.getResult(String.valueOf(i)));
-            ;
         }
     }
 }
